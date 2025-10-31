@@ -45,6 +45,7 @@ settings:
 ## Integración en CI (opcional)
 - Pre-commit hook con `pre-commit-terraform` o job de GitHub Actions que ejecute `terraform-docs` y verifique cambios.
 - Recomendación: fallar el pipeline si el README del módulo no está actualizado tras cambios de inputs/outputs.
+- Ejemplo funcionando: en el repo demo se incluyó un workflow en `.github/workflows/terraform-docs.yml` que genera y empuja el `README.md` del módulo en cada PR.
 
 ## Convención aplicada en este repo
 - Cada `modules/*/README.md` ya sigue la estructura típicamente generada por `terraform-docs`: Inputs, Outputs, Ejemplo de uso y Notas.
