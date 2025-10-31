@@ -8,7 +8,7 @@ Este repositorio **no contiene código** de infraestructura ni pipelines. Está 
 ## Contenido
 - `docs/` — Explicación técnica por dominios (TO‑BE, IaC con Terraform, CI‑CD con GitHub Actions, Gobierno, Observabilidad, Runbooks) y matriz de cobertura de requisitos. Revisa el índice en `docs/README.md`.
 - `diagrams/` — Diagramas Mermaid (`.mmd`) para arquitectura y pipelines.
-- `assets/` — Imágenes exportadas (opcional).
+- `assets/` — Anexos (PNG/PDF). Ver índice en `docs/12-anexos.md`.
 - `SECURITY.md` — Lineamientos mínimos de seguridad.
 - `CONTRIBUTING.md` — Forma de contribuir a los artefactos.
 - `CODEOWNERS` — Responsables por dominio (ejemplo).
@@ -34,3 +34,4 @@ Puedes ver los `.mmd` directamente en GitHub o pegarlos en el editor de Mermaid 
 - Comienza por `docs/README.md` (índice + mapa de navegación).
 - Muestra los diagramas: `diagrams/architecture-tobe.mmd` y `diagrams/cicd-sequence.mmd` (visualízalos en https://mermaid.live si es necesario).
 - Recorre la matriz `docs/09-requirements-matrix.md` para evidenciar cobertura del enunciado.
+- Si piden anexos, apunta a `docs/12-anexos.md` y a la carpeta `assets/` (imagen y PDFs).

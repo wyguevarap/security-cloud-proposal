@@ -41,6 +41,22 @@ flowchart LR
   cw -.archive.-> s3[(S3 Cifrado + Lifecycle)]
 ```
 
+> Vista gráfica (opcional): si prefieres la imagen PNG, consulta `assets/arquitectura-tobe.png`.
+
+### Servicios de soporte y seguridad
+- Certificados TLS con **ACM** (terminación en Cloudflare/API GW según dominio) y rotación automatizada.
+- Gestión de secretos en **Secrets Manager** y parámetros no sensibles en **SSM Parameter Store**.
+- Identidades y permisos con **IAM** (mínimo privilegio; roles por job/entorno en CI/CD).
+- **CloudTrail** para auditoría de APIs con export a S3 cifrado y retención con lifecycle.
+- Observabilidad con **CloudWatch** y **X‑Ray**; correlación de trazas end‑to‑end.
+
+### Notas de diseño (alineación con To‑Be)
+- La entrada expone dominios en Route 53; se protege en el edge con Cloudflare y en el perímetro nativo con WAF+Shield.
+- **API Gateway privado** con **VPC Link** a **NLB** interno; no se publican ALB.
+- Subredes por función (front público, aplicación privada, datos privados), simétricas en AZ‑A/AZ‑B (y AZ‑C si aplica).
+- **ECS Fargate** detrás del NLB; Aurora (writer/reader) y Redis para alivio de lectura.
+- **IGW/NAT** solo para egress controlado (parches, repos de contenedores, etc.).
+
 ### Servicios de soporte y seguridad
 - Certificados TLS con **ACM** terminando en Cloudflare/API GW según dominio; rotación automatizada.
 - Gestión de secretos en **Secrets Manager** y parámetros no sensibles en **SSM Parameter Store**.
