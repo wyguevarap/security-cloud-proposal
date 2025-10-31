@@ -11,11 +11,18 @@
 node_modules/
 *.log
 
-# Exportados
-assets/*.png
-assets/*.jpg
-assets/*.svg
-assets/*.pdf
+# Exportados (permitir assets en este repo)
+# Nota: descomentando estas líneas se ignorarían exportados.
+# assets/*.png
+# assets/*.jpg
+# assets/*.svg
+# assets/*.pdf
+
+# Asegurar que rastreamos assets del repo
+!assets/*.png
+!assets/*.jpg
+!assets/*.svg
+!assets/*.pdf
 
 # Archivos temporales
 *.tmp
