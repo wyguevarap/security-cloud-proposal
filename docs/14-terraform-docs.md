@@ -49,3 +49,12 @@ settings:
 ## Convención aplicada en este repo
 - Cada `modules/*/README.md` ya sigue la estructura típicamente generada por `terraform-docs`: Inputs, Outputs, Ejemplo de uso y Notas.
 - En un repo activo, reemplaza estas tablas manuales por la salida real de `terraform-docs`.
+
+## Demo práctica
+Se creó un repo de ejemplo con un módulo mínimo y README generado por `terraform-docs`:
+- https://github.com/wyguevarap/terraform-docs-sample
+
+Comando usado para generar README:
+```bash
+terraform-docs markdown table modules/network > modules/network/README.md
+```
