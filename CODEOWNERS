@@ -1,0 +1,6 @@
+# Ejemplo de responsables por dominio
+/docs/01-architecture-tobe.md   @arquitecto-principal
+/docs/02-terraform-approach.md  @plataforma-iac
+/docs/03-cicd-github-actions.md  @devops-ci
+/docs/04-governance-and-policies.md @seguridad-gob
+/docs/07-observability.md        @sre-observabilidad

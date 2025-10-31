@@ -1,0 +1,13 @@
+%% diagrams/cicd-sequence.mmd
+sequenceDiagram
+  participant Dev
+  participant Actions
+  participant AWS
+  Dev->>Actions: PR (cambios IaC)
+  Actions->>Actions: fmt/validate/lint/security/cost
+  Actions->>AWS: AssumeRole (OIDC, PlanRole)
+  Actions->>Actions: terraform plan (artefacto)
+  Dev->>Actions: Merge a main (aprobaciones)
+  Actions->>AWS: AssumeRole (OIDC, ApplyRole)
+  Actions->>AWS: terraform apply (lock DynDB)
+  Actions->>Dev: Evidencias + health checks + notificaciones

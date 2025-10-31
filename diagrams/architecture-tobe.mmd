@@ -1,0 +1,54 @@
+%% diagrams/architecture-tobe.mmd
+flowchart LR
+  user[Usuarios / Clientes] --> cf[Cloudflare (Edge)]
+  user --> waf[WAF + Shield (Nativo AWS)]
+  cf --> r53[Route 53 Health Checks / Failover]
+  waf --> r53
+
+  r53 --> apigw[API Gateway (Privado)]
+  apigw --> vpclink[VPC Link]
+  vpclink --> nlb[NLB (L4 Interno)]
+
+  nlb --> ecs1[ECS Fargate (AZ-A)]
+  nlb --> ecs2[ECS Fargate (AZ-B)]
+  nlb --> ecs3[ECS Fargate (AZ-C)]
+
+  subgraph Data
+    aurora[(Aurora PostgreSQL Multi-AZ)]
+    redis[(Redis Multi-AZ / ElastiCache)]
+  end
+
+  ecs1 --> redis
+  ecs2 --> redis
+  ecs3 --> redis
+
+  ecs1 --> aurora
+  ecs2 --> aurora
+  ecs3 --> aurora
+
+  %% Observabilidad y registros
+  apigw -.logs/metrics/traces.-> cw[(CloudWatch/X-Ray)]
+  ecs1 -.logs/metrics.-> cw
+  ecs2 -.logs/metrics.-> cw
+  ecs3 -.logs/metrics.-> cw
+  cw -.archive.-> s3[(S3 Cifrado + Lifecycle)]
+  cloudtrail[CloudTrail] -.audit.-> s3
+
+  %% Servicios de seguridad/gestión
+  subgraph Security_And_Ops[Security & Operations]
+    acm[ACM (TLS Certs)]
+    secrets[Secrets Manager]
+    ssm[Parameter Store]
+    iam[IAM]
+    cloudtrail
+    cw
+    s3
+  end
+
+  apigw -.tls.-> acm
+  ecs1 -.secrets.-> secrets
+  ecs2 -.secrets.-> secrets
+  ecs3 -.secrets.-> secrets
+  ecs1 -.params.-> ssm
+  ecs2 -.params.-> ssm
+  ecs3 -.params.-> ssm
