@@ -1,11 +1,20 @@
 # Module: data (referencia)
 
+Propósito: bases de datos y caché para cargas transaccionales con alta disponibilidad.
+
 Entradas sugeridas:
 - `engine` (string: postgresql)
-- `instance_class`/`capacity` (string/number)
+- `capacity` (string/number)
 - `multi_az` (bool)
 - `backup_retention` (number)
+- `pitr_enabled` (bool)
 - `redis_node_type` (string)
 - `tags` (map(string))
 
-Recursos: Aurora PostgreSQL Multi‑AZ (writer/reader), Redis Multi‑AZ (ElastiCache), parámetros y secretos.
+Configuración sugerida:
+- Aurora PostgreSQL con cluster Multi‑AZ; habilitar PITR y métricas de `replica_lag`.
+- Redis Multi‑AZ como read‑through cache; TTL con jitter para evitar thundering herd.
+- Cifrado KMS para RDS/Redis; secretos de credenciales en Secrets Manager.
+
+Notas:
+- Considerar `query routing` para lecturas pesadas hacia readers.

@@ -13,6 +13,11 @@
 - Roles por *job*: `PlanRole` (lectura), `ApplyRole` (mutación restringida), `DriftRole` (lectura).
 - Sesiones cortas, *boundaries* por repo/branch/entorno.
 
+### Sugerencias de configuración
+- `aud` = `sts.amazonaws.com`; `sub` restringido a `repo:<owner>/<repo>:ref:refs/heads/<branch>`.
+- Permisos mínimos por job (`permissions:` en YAML): usar `id-token: write` solo donde sea necesario y `contents: read`.
+- Artefactos: firmar o al menos adjuntar checksum del `planfile` y validar concordancia antes de `apply`.
+
 ## Diagrama secuencial
 ```mermaid
 sequenceDiagram

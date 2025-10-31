@@ -15,6 +15,8 @@ Este repositorio **no contiene código** de infraestructura ni pipelines. Está 
 - `CODEOWNERS` — Responsables por dominio (ejemplo).
 - `LICENSE` — MIT.
 
+Para una vista detallada de la estructura, consulta `docs/13-estructura-del-repo.md`.
+
 ## Visualizar diagramas Mermaid
 Puedes ver los `.mmd` directamente en GitHub o pegarlos en el editor de Mermaid (https://mermaid.live).
 
@@ -36,3 +38,13 @@ Puedes ver los `.mmd` directamente en GitHub o pegarlos en el editor de Mermaid 
 - Muestra los diagramas: `diagrams/architecture-tobe.mmd` y `diagrams/cicd-sequence.mmd` (visualízalos en https://mermaid.live si es necesario).
 - Recorre la matriz `docs/09-requirements-matrix.md` para evidenciar cobertura del enunciado.
 - Si piden anexos, apunta a `docs/12-anexos.md` y a la carpeta `assets/` (imagen y PDFs).
+
+## Qué NO incluye
+- No hay código de infraestructura (`.tf`) ni pipelines (`.yml/.yaml`).
+- No se automatiza Cloudflare ni WAF en este repo (solo se describe el patrón y controles).
+
+## Sugerencias de configuración clave
+- Nombres y etiquetas: `<org>-<dominio>-<env>-<region>`, tags obligatorias: `CostCenter`, `Owner`, `Environment`, `DataClass`, `RTO`, `RPO`.
+- Backend de estado: S3 cifrado + DynamoDB para lock por entorno/cuenta (`iac/terraform/global/bootstrap/`).
+- OIDC GitHub→AWS: roles por job (Plan/Apply/Drift), sesiones ≤ 1h, boundaries por repo/branch/entorno.
+- Retención de logs y archivado: 30–90 días en CloudWatch, export a S3 con lifecycle a Glacier.
