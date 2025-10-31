@@ -16,6 +16,7 @@ Este repositorio **no contiene código** de infraestructura ni pipelines. Está 
 - `LICENSE` — MIT.
 
 Para una vista detallada de la estructura, consulta `docs/13-estructura-del-repo.md`.
+Para automatizar documentación de módulos de Terraform en un repo de IaC real, revisa `docs/14-terraform-docs.md`.
 
 ## Visualizar diagramas Mermaid
 Puedes ver los `.mmd` directamente en GitHub o pegarlos en el editor de Mermaid (https://mermaid.live).
