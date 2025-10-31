@@ -8,6 +8,7 @@ Este repositorio **no contiene código** de infraestructura ni pipelines. Está 
 ## Contenido
 - `docs/` — Explicación técnica por dominios (TO‑BE, IaC con Terraform, CI‑CD con GitHub Actions, Gobierno, Observabilidad, Runbooks) y matriz de cobertura de requisitos. Revisa el índice en `docs/README.md`.
 - `diagrams/` — Diagramas Mermaid (`.mmd`) para arquitectura y pipelines.
+- `iac/terraform/` — Estructura de referencia de IaC (carpetas y esqueletos en Markdown, sin `.tf`).
 - `assets/` — Anexos (PNG/PDF). Ver índice en `docs/12-anexos.md`.
 - `SECURITY.md` — Lineamientos mínimos de seguridad.
 - `CONTRIBUTING.md` — Forma de contribuir a los artefactos.
